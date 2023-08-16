@@ -1,0 +1,21 @@
+// modified from cs426 lab1
+// https://github.com/shixiao/cs426-spring2023-labs/tree/main/lab1
+
+syntax = "proto3";
+
+package time_service;
+option go_package = "mini-spanner/time_service/proto";
+
+import "google/protobuf/timestamp.proto";
+
+message GetTimeRequest {
+    
+}
+
+message GetTimeResponse {
+    google.protobuf.Timestamp time = 1;
+}
+
+service TimeService {
+    rpc GetTime(GetTimeRequest) returns(GetTimeResponse) {}
+}

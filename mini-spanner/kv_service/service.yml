@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mini-spanner-service
+spec:
+  selector:
+    app: mini-spanner
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

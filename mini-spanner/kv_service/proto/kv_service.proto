@@ -1,0 +1,34 @@
+// modified from cs426 lab1
+// https://github.com/shixiao/cs426-spring2023-labs/tree/main/lab1
+
+syntax = "proto3";
+
+package kv_service;
+
+option go_package = "mini-spanner/kv_service/proto";
+
+message KvPair {
+    string key = 1;
+    string val = 2;
+}
+
+message GetKvRequest {
+    repeated KvPair keys = 1;
+}
+
+message GetKvResponse {
+    repeated KvPair vals = 1;
+}
+
+message SetKvRequest {
+    repeated KvPair kvPairs = 1;
+}
+
+message SetKvResponse {
+    repeated bool successes = 1;
+}
+
+service KvService {
+    rpc GetVal(GetKvRequest) returns(GetKvResponse) {}
+    rpc SetVal(SetKvRequest) returns(SetKvResponse) {}
+}

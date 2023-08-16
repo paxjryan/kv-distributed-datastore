@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: time-server
+  labels:
+    app: time-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: time-server
+  template:
+    metadata:
+      labels:
+        app: time-server
+    spec:
+      imagePullSecrets:
+        - name: docker-credentials
+      containers:
+        - name: time-service
+          image: registry.cs426.cloud/njr38/time-service:latest
+          ports:
+            - containerPort: 8081
+          args: []
+          imagePullPolicy: Always

@@ -1,0 +1,36 @@
+In priority order (highest priority first):
+
+1. Basic tests
+Idea: show that kv store actually functions
+- getting and setting single key
+- getting and setting multiple keys
+- overwriting keys
+- get(nonexistent key) aborts
+- txns can be processed concurrently
+
+2. Serializability of schedule
+Idea: show that mini-spanner never chooses a non-conflict serializable schedule
+- concurrently send T1 {set A to 1, sleep, get A} and T2 {set A to 2, sleep, get A}; expect T1 get = 1 and T2 get = 2
+- send T1 {set A to 1, sleep >> timeout, get A}, then send T2 {set A to 2}; expect T1 get = 1 and T2 timeout
+
+3. Linearizability of schedule
+Idea: show that mini-spanner never chooses a non-linearizable schedule
+- send 100 txns [wait for commit(Tn) to send Tn+1]; check that ts(T1) < ts(T2) < ... < ts(T100)
+- vary sleep times in between txn sends
+
+4. Client crash-tolerance (reach goal)
+Idea: show that correctness is preserved when client crashes and restarts
+- crash client and immediately restart
+- client crashes after setRead() rpcs to one or more servers -> txn aborted + locks released
+- client crashes after extractPromise() rpcs to some but not all servers -> txn aborted + locks released
+- client crashes after extractPromise() rpcs to all servers -> 
+    -- one or more servers denied promise: txn aborted + locks released
+    -- all servers promised: servers continuously retry promise, txn neither committed nor aborted
+- client crashes after globalCommit(COMMIT) to one or more servers -> txn successfully committed
+- client crashes after globalCommit(ABORT) to one or more servers -> txn aborted + locks released
+
+5. Stress testing (reach goal)
+Idea: show that mini-spanner can handle significant traffic
+- write load generator
+- analyze using lab1 tools
+- correctness, external consistency, and concurrency are preserved

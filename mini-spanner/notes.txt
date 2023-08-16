@@ -1,0 +1,41 @@
+// GENERATING GRPC FILES WITH A .PROTO FILE
+
+1. Write the .proto file
+2. Make sure protoc compiler/plugins are installed and path is updated [instructions at https://grpc.io/docs/languages/go/quickstart/]
+3. protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative <directory>/<file>.proto
+
+
+// DOCKER AND K8S
+
+How to build a Docker container and push to class registry:
+1. navigate to mini-spanner directory
+2. docker build -t registry.cs426.cloud/<netid>/<service>:latest -f <service-dir>/Dockerfile .
+    e.g. kv_service: docker build -t registry.cs426.cloud/njr38/mini-spanner:latest -f kv_service/Dockerfile .
+    e.g. time_service: docker build -t registry.cs426.cloud/njr38/time-service:latest -f time_service/Dockerfile .
+3. docker push registry.cs426.cloud/<netid>/[mini-spanner|time-service]:latest
+
+How to start k8s service/deployment:
+kubectl apply -f [service.yml|deployment.yml]
+
+Port-forwarding:
+kubectl port-forward services/[mini-spanner|time]-service 8080:80
+
+Front-end (in a separate terminal from port-forwarding):
+go run frontend/frontend.go
+
+
+// MISC
+
+go mod tidy -> updates go.mod and go.sum
+
+Docker Hub access:
+username: paxjryan
+pw: dockerpass
+
+minikube resources:
+https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-by-providing-credentials-on-the-command-line
+https://gist.github.com/rkuzsma/b9a0e342c56479f5e58d654b1341f01e
+
+Working with protobuf timestamps:
+https://pkg.go.dev/google.golang.org/protobuf/types/known/timestamppb
+https://stackoverflow.com/questions/52802521/how-can-i-get-time-time-in-golang-protobuf-v3-struct

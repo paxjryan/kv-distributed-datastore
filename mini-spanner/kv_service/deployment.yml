@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mini-spanner
+  labels:
+    app: mini-spanner
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mini-spanner
+  template:
+    metadata:
+      labels:
+        app: mini-spanner
+    spec:
+      imagePullSecrets:
+        - name: docker-credentials
+      containers:
+        - name: mini-spanner
+          image: registry.cs426.cloud/njr38/mini-spanner:latest
+          ports:
+            - containerPort: 8080
+          args: ["--time-service=time-service.njr38:8081"]
+          imagePullPolicy: Always

@@ -1,0 +1,34 @@
+      Time     Time
+Date  Started  Spent Work completed
+----  -------  ----  --------------
+before 4/29   ~7:00  helping write project proposal, integrating Xiao's comments to scope down the project, meeting/discussing/thinking
+                        about how the implementations of 2PL and 2PC might work
+4/29  6:00pm   3:00  read grpc/protobuf documentation, implemented a skeleton of kv_service (mostly copying code from lab1)
+4/30  7:30pm   4:00  reading lab1 code as an example, familiarizing with Docker Hub and minikube, getting deployment to pull from the
+                        Docker Hub (spent an hour realizing I was creating the kubectl secret with the wrong password!)
+5/1   10:00pm  1:00  meeting with Xiao about how to interact with a k8s deployment/port-forwarding; check-in with Peter and Anna about 
+                        project progress
+5/2   10:45pm  1:00  moved deployment from minikube onto class registry, wrote basic frontend and learned how to set up port-forwarding
+5/3   10:40am  1:30  wrote frontend basic rpc tests, debugging failing tcp connection
+5/3   3:00pm   1:30  debugging k8s service DNS hostname, scanned client.go/server.go pseudocode put together by Peter and Anna
+5/3   7:00pm   0:30  meeting with Peter, finishing comments/adding to pseudocode
+5/4   5:30pm   1:00  successfully implemented rpc from local client to k8s service with port-forwarding! started writing time service
+5/4   7:50pm   3:15  basic time service working; started working on getting mini-spanner service to communicate with time-service
+5/5   9:30pm   0:30  check-in w Peter and Anna
+5/5   10:45pm  0:45  mini-spanner service successfully communicating with time-service (issue was service port needed to = container port)
+5/6   7:30pm   2:00  brainstorming tests
+5/7   8:45pm   1:00  call w Peter and Anna; testing new version of kv_service.proto
+5/8   8:20pm   2:15  attempting to figure out connection pooling
+5/9   10:40am  0:30  connection pooling; realizing that go's connection pooling library might be for internal use only
+5/9   8:00pm   1:30  call w Xiao, Peter, and Anna to discuss priorities / project wrap-up; recording demonstration; time.log difficulties
+
+               ----
+               33:45 TOTAL time spent
+
+Discussion with: Anna Zhang, Peter Yu (group members)
+
+Discussion of conceptual and coding difficulties: 
+- learned a lot about the importance of starting early, scoping, setting manageable deadlines, agreeing on the distribution of work so that multiple facets of the project can make progress concurrently. Also learned that having only one person know how the deployment side of things works is a huge bottleneck for testing
+- practice with grpc/writing .proto files and the protoc compiler
+- practice with Docker, including learning how to interact with Docker Hub and building a better mental picture of what Docker containers and images actually are
+- practice with Kubernetes, including learning what a Serivce really is and how to set up port-forwarding (both local client <-> k8s server and k8s server <-> k8s server) as well as some initial research into grpc connection pooling
