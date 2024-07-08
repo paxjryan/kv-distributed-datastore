@@ -1,0 +1,3 @@
+TODO:
+- figure out how gRPC works again? and possibly add a .gitignore for the go.mod and go.sum files
+- update README.md
