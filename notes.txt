@@ -28,9 +28,7 @@ go run frontend/frontend.go
 
 go mod tidy -> updates go.mod and go.sum
 
-Docker Hub access:
-username: paxjryan
-pw: dockerpass
+Docker Hub access
 
 minikube resources:
 https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-by-providing-credentials-on-the-command-line
